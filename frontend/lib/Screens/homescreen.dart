@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:delivery_app/contant/constant.dart';
 import 'package:delivery_app/model/SocketModel.dart';
 import 'package:delivery_app/model/UserData.dart';
-import 'package:delivery_app/model/chatmodel.dart';
-import 'package:delivery_app/model/messagemodel.dart';
 import 'package:delivery_app/widgets/customcardwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
@@ -112,12 +110,11 @@ class _HomeScreenState extends State<HomeScreen>
         UsersList.forEach((element) {
           if (element["id"] == context.read<UserData>().userData!["id"]) {
           } else {
+            context.read<SocketModel>().isChatOpen[element["id"]] = false;
             filter.add(element);
           }
         });
         UsersList = filter;
-        for (var i = 0; i < UsersList.length; i++)
-          print("printlist:${UsersList}");
       });
     }
   }

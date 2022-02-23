@@ -16,6 +16,12 @@ class SocketModel with ChangeNotifier {
     _itemcounters = item;
     notifyListeners();
   }
+  Map _isChatOpen = {};
+  Map get isChatOpen => _isChatOpen;
+  set isChatOpen(Map item) {
+    isChatOpen = item;
+    notifyListeners();
+  }
 
   IO.Socket? _socket;
   IO.Socket? get socket => _socket;
@@ -81,14 +87,15 @@ class SocketModel with ChangeNotifier {
   
 
   addMessage(MessageModel messageModelParameter,  receiverId, {bool? isSender}) async{
+    print(isChatOpen);
     if (messages[receiverId.toString()] == null) {
       messages[receiverId.toString()] = <MessageModel>[messageModelParameter];
-      if (isSender == true) 
-      itemCounts[receiverId.toString()] = true;
+        if (isSender == true)
+          itemCounts[receiverId.toString()] = true;
     } else  {
       messages[receiverId.toString()].add(messageModelParameter);
-      if (isSender == true) 
-      itemCounts[receiverId.toString()] = true;
+        if (isSender == true)
+          itemCounts[receiverId.toString()] = true;
     }
     notifyListeners();
   }
@@ -96,6 +103,13 @@ class SocketModel with ChangeNotifier {
   resetCounter(String id) {
     itemCounts[id] =false;
         notifyListeners();
+
+  }
+
+  setChatOpen(String id , bool isOpen) {
+    _isChatOpen[id] = isOpen;
+    print(isChatOpen);
+    notifyListeners();
 
   }
 }

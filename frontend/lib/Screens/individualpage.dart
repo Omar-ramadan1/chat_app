@@ -1,18 +1,13 @@
 import 'dart:typed_data';
 
-import 'package:camera/camera.dart';
-import 'package:delivery_app/Logic/IndividualScreenLogic.dart';
-import 'package:delivery_app/contant/constant.dart';
 
+import 'package:delivery_app/Logic/IndividualScreenLogic.dart';
 import 'package:delivery_app/model/SocketModel.dart';
-import 'package:delivery_app/model/chatmodel.dart';
 import 'package:delivery_app/model/messagemodel.dart';
 import 'package:delivery_app/widgets/Appbarchatwidget.dart';
 import 'package:delivery_app/widgets/OwnMessgaewidget.dart';
 import 'package:delivery_app/widgets/Replymessagewidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sound_lite/public/flutter_sound_recorder.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/src/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 //import 'package:emoji_picker/emoji_picker.dart';
@@ -20,16 +15,12 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 class IndividualPage extends StatefulWidget {
   final Map chatModel;
   final Map sourchat;
-    final bool counter;
-    
+  final bool counter;
 
 //  final List<MessageModel> messages;
-  IndividualPage(
-    this.chatModel,
-    this.sourchat,
-    this.counter
-    //  this.messages,
-  );
+  IndividualPage(this.chatModel, this.sourchat, this.counter
+      //  this.messages,
+      );
 
   @override
   _IndividualPageState createState() => _IndividualPageState();
@@ -44,17 +35,13 @@ class _IndividualPageState extends State<IndividualPage> {
   ScrollController scrollController = ScrollController();
   IndividualScreenLogic? individualScreenLogic;
   List<MessageModel> messages = [];
- 
-
-
-
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     socket = context.read<SocketModel>().socket!;
-
+    print(context.read<SocketModel>().isChatOpen);
     individualScreenLogic = IndividualScreenLogic(this);
 
     focusMode.addListener(() {
@@ -65,6 +52,22 @@ class _IndividualPageState extends State<IndividualPage> {
       }
     });
   }
+  @override
+  void deactivate() {
+    // TODO: implement deactivate
+    super.deactivate();
+    print("context.read<SocketModel>().isChatOpen");
+    print(context.read<SocketModel>().isChatOpen);
+    // context.read<SocketModel>().setChatOpen(widget.chatModel["id"], false);
+
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    // context.read<SocketModel>().isChatOpen[widget.chatModel["id"]] = false;
+  }
 
   @override
   void didChangeDependencies() {
@@ -72,13 +75,12 @@ class _IndividualPageState extends State<IndividualPage> {
     super.didChangeDependencies();
     //  print(widget.chatModel["id"]);
     //   print(context.watch<SocketModel>().messages[widget.sourchat["id"]]);
-    print("msg::::${messages}");
+
 
     messages =
         context.watch<SocketModel>().messages[widget.chatModel["id"]] == null
             ? []
             : context.watch<SocketModel>().messages[widget.chatModel["id"]];
-    print("msg::::is${messages}");
   }
 
   void sendMessage(String message, String sourceId, String targetId) {
@@ -122,8 +124,11 @@ class _IndividualPageState extends State<IndividualPage> {
                       );
                     }
                     if (messages[index].type == "source") {
-                      return OwnMessageCard(messages[index].message,
-                          messages[index].time, messages[index].messageType,widget.counter);
+                      return OwnMessageCard(
+                          messages[index].message,
+                          messages[index].time,
+                          messages[index].messageType,
+                          widget.counter);
                     } else {
                       return ReplyCard(messages[index].message,
                           messages[index].time, messages[index].messageType);
@@ -168,17 +173,13 @@ class _IndividualPageState extends State<IndividualPage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "       type a message",
-                           
                                 suffixIcon: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     IconButton(
                                       onPressed: () {
-                                     
-                                           
-                                              individualScreenLogic
-                                                                    ?.sendImagefromgalley(
-                                                                        context);
+                                        individualScreenLogic
+                                            ?.sendImagefromgalley(context);
                                       },
                                       icon: Icon(Icons.camera_alt,
                                           color: Colors.black),
@@ -187,7 +188,7 @@ class _IndividualPageState extends State<IndividualPage> {
                                         ? IconButton(
                                             onPressed: () {
                                               if (sendButton) {
-                                                print("llll");
+
 
                                                 scrollController.animateTo(
                                                     scrollController.position
@@ -211,9 +212,7 @@ class _IndividualPageState extends State<IndividualPage> {
                                               color: Colors.black,
                                             ))
                                         : IconButton(
-                                            onPressed: () async {
-                                     
-                                            },
+                                            onPressed: () async {},
                                             icon: Icon(Icons.send))
                                   ],
                                 ),
@@ -228,7 +227,7 @@ class _IndividualPageState extends State<IndividualPage> {
                 ),
               ),
             ),
-          //     show ? emojeSelect() : Container()
+            //     show ? emojeSelect() : Container()
           ],
         ),
       ),

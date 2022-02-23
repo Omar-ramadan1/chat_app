@@ -21,6 +21,8 @@ class CustomCard extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
+            context.read<SocketModel>().setChatOpen(chatModel["id"], true);
+            print(context.read<SocketModel>().isChatOpen);
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -29,7 +31,7 @@ class CustomCard extends StatelessWidget {
             context.read<SocketModel>().resetCounter(chatModel["id"]);
           },
           child: Container(
-            color: counter == false ? Colors.transparent : Colors.white,
+            color: counter ? Colors.white :  Colors.transparent,
             height: 100,
             child: ListTile(
               leading: Container(
