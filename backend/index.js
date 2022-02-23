@@ -82,9 +82,6 @@ io.on("connection",(socket)=>{
         console.log(clients[Receiver] == null);
         if(clients[Receiver])
         clients[Receiver].emit("sharedmsg",msg);
-
-        
-
      });
 
 });

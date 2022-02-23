@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 class OwnMessageCard extends StatefulWidget {
    final message;
    final String time , messageType;
-   OwnMessageCard(this.message,this.time, this.messageType);
+       final bool counter;
+
+
+   OwnMessageCard(this.message,this.time, this.messageType,this.counter);
 
   @override
   State<OwnMessageCard> createState() => _OwnMessageCardState();
@@ -81,10 +84,13 @@ class _OwnMessageCardState extends State<OwnMessageCard> {
                           SizedBox(
                             width: 5,
                           ),
-                          Icon(
+            widget.counter == false?              Icon(
                             Icons.done,
                             size: 20,
-                          ),
+                          ):Icon(
+                            Icons.done_all  ,
+                            size: 20,
+                          )
                         ],
                       ),
                     ),

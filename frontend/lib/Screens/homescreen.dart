@@ -41,9 +41,8 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   void addSearchedFOrItemsToSearchedList(String searchedCharacter) {
-    // for (var i = 0; i < UsersList.length; i++)
     FindUser = UsersList.where(
-            (user) => user["name"].toLowerCase().startsWith(searchedCharacter))
+            (user) => user["email"].toLowerCase().startsWith(searchedCharacter))
         .toList();
     setState(() {});
   }
@@ -177,9 +176,9 @@ class _HomeScreenState extends State<HomeScreen>
                           UsersList[i],
                           context.watch<UserData>().userData!,
                           context
-                                      .watch<SocketModel>()
-                                      .itemCounts[UsersList[i]["id"]] ==
-                                  null
+                          .watch<SocketModel>()
+                          .itemCounts[UsersList[i]["id"]] ==
+                           null
                               ? itemCounts[UsersList[i]["id"]] = false
                               : context
                                   .watch<SocketModel>()

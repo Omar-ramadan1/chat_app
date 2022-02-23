@@ -20,10 +20,14 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 class IndividualPage extends StatefulWidget {
   final Map chatModel;
   final Map sourchat;
+    final bool counter;
+    
+
 //  final List<MessageModel> messages;
   IndividualPage(
     this.chatModel,
     this.sourchat,
+    this.counter
     //  this.messages,
   );
 
@@ -119,7 +123,7 @@ class _IndividualPageState extends State<IndividualPage> {
                     }
                     if (messages[index].type == "source") {
                       return OwnMessageCard(messages[index].message,
-                          messages[index].time, messages[index].messageType);
+                          messages[index].time, messages[index].messageType,widget.counter);
                     } else {
                       return ReplyCard(messages[index].message,
                           messages[index].time, messages[index].messageType);

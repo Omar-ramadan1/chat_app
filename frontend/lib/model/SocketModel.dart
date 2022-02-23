@@ -39,6 +39,8 @@ class SocketModel with ChangeNotifier {
         notifyListeners();
       });
       socket!.on("image", (msg) {
+             final player = AudioCache();
+        player.play("tone.mp3");
         List<int> intList = msg["imageData"]
             .cast<int>()
             .toList(); //This is the To convert from List to List<int>
@@ -51,7 +53,7 @@ class SocketModel with ChangeNotifier {
         notifyListeners();
       });
             socket!.on("video", (msg) {
-        List<int> intList = msg["imageData"]
+        List<int> intList = msg["videoData"]
             .cast<int>()
             .toList(); //This is the To convert from List to List<int>
         Uint8List data = Uint8List.fromList(
@@ -93,5 +95,7 @@ class SocketModel with ChangeNotifier {
 
   resetCounter(String id) {
     itemCounts[id] =false;
+        notifyListeners();
+
   }
 }

@@ -31,7 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
        SignUpScreen()
      :
        HomeScreen(),
-     //    MainLoginScreen(),
       ),
     );
   }

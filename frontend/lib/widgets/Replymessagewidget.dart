@@ -81,10 +81,10 @@ class _ReplyCardState extends State<ReplyCard> {
                           SizedBox(
                             width: 5,
                           ),
-                          Icon(
-                            Icons.done,
-                            size: 20,
-                          ),
+                          // Icon(
+                          //   Icons.done,
+                          //   size: 20,
+                          // ),
                         ],
                       ),
                     ),
