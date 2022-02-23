@@ -21,7 +21,6 @@ class CustomCard extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            context.read<SocketModel>().setChatOpen(chatModel["id"], true);
             print(context.read<SocketModel>().isChatOpen);
             Navigator.push(
                 context,

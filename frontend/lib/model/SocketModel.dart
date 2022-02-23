@@ -87,7 +87,6 @@ class SocketModel with ChangeNotifier {
   
 
   addMessage(MessageModel messageModelParameter,  receiverId, {bool? isSender}) async{
-    print(isChatOpen);
     if (messages[receiverId.toString()] == null) {
       messages[receiverId.toString()] = <MessageModel>[messageModelParameter];
         if (isSender == true)
@@ -101,15 +100,9 @@ class SocketModel with ChangeNotifier {
   }
 
   resetCounter(String id) {
-    itemCounts[id] =false;
+    itemCounts[id] = false;
         notifyListeners();
 
   }
 
-  setChatOpen(String id , bool isOpen) {
-    _isChatOpen[id] = isOpen;
-    print(isChatOpen);
-    notifyListeners();
-
-  }
 }

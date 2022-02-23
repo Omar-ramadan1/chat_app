@@ -56,9 +56,10 @@ class _IndividualPageState extends State<IndividualPage> {
   void deactivate() {
     // TODO: implement deactivate
     super.deactivate();
-    print("context.read<SocketModel>().isChatOpen");
-    print(context.read<SocketModel>().isChatOpen);
-    // context.read<SocketModel>().setChatOpen(widget.chatModel["id"], false);
+    // print("context.read<SocketModel>().isChatOpen");
+
+
+
 
   }
   @override
@@ -73,14 +74,11 @@ class _IndividualPageState extends State<IndividualPage> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    //  print(widget.chatModel["id"]);
-    //   print(context.watch<SocketModel>().messages[widget.sourchat["id"]]);
-
-
     messages =
         context.watch<SocketModel>().messages[widget.chatModel["id"]] == null
             ? []
             : context.watch<SocketModel>().messages[widget.chatModel["id"]];
+    context.watch<SocketModel>().itemCounts[widget.chatModel["id"]] = false;
   }
 
   void sendMessage(String message, String sourceId, String targetId) {

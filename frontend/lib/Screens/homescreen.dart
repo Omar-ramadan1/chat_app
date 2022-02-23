@@ -104,8 +104,6 @@ class _HomeScreenState extends State<HomeScreen>
       setState(() {
         UsersList = jsonObj['result'];
         FindUser = UsersList;
-        //    print(UsersList);
-
         List filter = [];
         UsersList.forEach((element) {
           if (element["id"] == context.read<UserData>().userData!["id"]) {
